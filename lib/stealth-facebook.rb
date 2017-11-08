@@ -1,0 +1,1 @@
+require 'stealth/facebook'
