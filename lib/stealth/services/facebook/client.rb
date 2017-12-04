@@ -33,7 +33,7 @@ module Stealth
             fields = [:first_name, :last_name, :profile_pic, :locale, :timezone, :gender, :is_payment_enabled, :last_ad_referral]
           end
 
-          query_hash ={
+          query_hash = {
             fields: fields.join(','),
             access_token: Stealth.config.facebook.page_access_token
           }
@@ -50,7 +50,7 @@ module Stealth
           if response.status.in?(200..299)
             MultiJson.load(response.body)
           else
-            false
+            raise(Stealth::Errors::ServiceError, "Facebook error #{response.status}: #{response.body}")
           end
         end
       end
