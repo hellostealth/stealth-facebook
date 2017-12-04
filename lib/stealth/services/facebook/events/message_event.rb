@@ -31,13 +31,18 @@ module Stealth
           end
 
           def fetch_location
-            if params['location'].present?
-              lat = params['location']['coordinates']['lat']
-              lng = params['location']['coordinates']['long']
-              service_message.location = {
-                lat: lat,
-                lng: lng
-              }
+            if params['message']['attachments'].present? && params['message']['attachments'].is_a?(Array)
+              params['message']['attachments'].each do |attachment|
+                next unless attachment['type'] == 'location'
+
+                lat = attachment['payload']['coordinates']['lat']
+                lng = attachment['payload']['coordinates']['long']
+
+                service_message.location = {
+                  lat: lat,
+                  lng: lng
+                }
+              end
             end
           end
 
