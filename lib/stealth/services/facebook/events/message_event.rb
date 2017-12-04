@@ -42,8 +42,8 @@ module Stealth
           end
 
           def fetch_attachments
-            if params['attachments'].present? && params['attachments'].is_a?(Array)
-              params['attachments'].each do |attachment|
+            if params['message']['attachments'].present? && params['message']['attachments'].is_a?(Array)
+              params['message']['attachments'].each do |attachment|
                 service_message.attachments << {
                   type: attachment['type'],
                   url: attachment['payload']['url']
