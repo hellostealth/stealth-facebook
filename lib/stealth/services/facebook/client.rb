@@ -40,7 +40,7 @@ module Stealth
 
           uri = URI::HTTPS.build(
             host: "graph.facebook.com",
-            path: "/v2.10/#{recipient_id}",
+            path: "/v2.12/#{recipient_id}",
             query: query_hash.to_query
           )
 
