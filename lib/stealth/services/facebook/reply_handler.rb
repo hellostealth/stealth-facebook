@@ -356,11 +356,13 @@ module Stealth
 
           def generate_suggestions(suggestions:)
             quick_replies = suggestions.collect do |suggestion|
-              # If the user selected a location-type button, no other info needed
-              if suggestion["type"] == 'location'
+              case suggestion["type"]
+              when 'location'
                 quick_reply = { "content_type" => "location" }
-
-              # Facebook only supports these two types for now
+              when 'phone'
+                quick_reply = { "content_type" => "user_phone_number" }
+              when 'email'
+                quick_reply = { "content_type" => "user_email" }
               else
                 quick_reply = {
                   "content_type" => "text",
