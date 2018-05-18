@@ -4,7 +4,13 @@ This integration adds support for Facebook bots within Stealth.
 
 ## Configure Your Facebook Page
 
-Add instructions
+To create your Facebook bot, visit the [Facebook Developers](https://developers.facebook.com) page. Full instructions are provided on the [Facebook Messenger Docs](https://developers.facebook.com/docs/messenger-platform/) page.
+
+When configuring your webhooks, you'll want to enable the `messages`, `messaging_referrals`, and `messaging_postbacks` web hooks like so:
+
+<img src='fb-config.png' width='875px' alt='Facebook Config Screenshot' />
+
+Make sure you don't enable `message_reads` as that is not yet supported by this gem.
 
 ## Configure The Integration
 
