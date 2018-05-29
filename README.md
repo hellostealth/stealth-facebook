@@ -1,6 +1,6 @@
 # Stealth Facebook
 
-This integration adds support for Facebook bots within Stealth.
+This integration adds support for Facebook bots within [Stealth](https://github.com/hellostealth/stealth).
 
 ## Configure Your Facebook Page
 
