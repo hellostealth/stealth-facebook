@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name = 'stealth-facebook'
   s.summary = 'Stealth Facebook Messenger driver'
   s.description = 'Facebook Messenger driver for Stealth.'
-  s.homepage = 'https://github.com/whoisblackops/stealth-facebook'
+  s.homepage = 'https://github.com/hellostealth/stealth-facebook'
   s.licenses = ['MIT']
   s.version = version
   s.author = 'Mauricio Gomes'
