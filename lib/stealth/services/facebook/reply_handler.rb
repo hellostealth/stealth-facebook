@@ -147,14 +147,14 @@ module Stealth
           )
 
           fb_elements = generate_list_elements(elements: reply["elements"])
-          template["message"]["attachments"]["payload"]["elements"] = fb_elements
+          template["message"]["attachment"]["payload"]["elements"] = fb_elements
 
           if reply["buttons"].present?
             if reply["buttons"].size > 1
               raise(ArgumentError, "Facebook lists support a single button attached to the list itsef.")
             end
 
-            template["message"]["attachments"]["payload"]["buttons"] = generate_buttons(buttons: reply["buttons"])
+            template["message"]["attachment"]["payload"]["buttons"] = generate_buttons(buttons: reply["buttons"])
           end
 
           template
@@ -249,7 +249,7 @@ module Stealth
                 raise(ArgumentError, "Facebook list replies only support 'large' or 'compact' as the top_element_style.")
               end
 
-              template["message"]["payload"]["top_element_style"] = top_element_style
+              template["message"]['attachment']["payload"]["top_element_style"] = top_element_style
             end
 
             if buttons.present?
