@@ -93,6 +93,39 @@ Each time you make a change to the persistent menu, you will have to upload the 
 stealth setup facebook
 ```
 
+### Profile Data
+
+By default, your Facebook bots may retrieve the `id`, `name`, `first_name`, `last_name`, and `profile_pic` fields for users that have made this information public and have opted-in to your bot. More info [here](https://developers.facebook.com/docs/messenger-platform/identity/user-profile).
+
+To fetch a user's profile with `stealth-facebook` you can call the following:
+
+```ruby
+fb_profile = Stealth::Services::Facebook::Client.fetch_profile(
+  recipient_id: current_user_id
+)
+```
+
+`fb_profile` is a hash that contains the fields above:
+
+```ruby
+{
+  'id'            => 1464633220279330,
+  'name'          => "Carol Robbins",
+  'first_name'    => "Carol",
+  'last_name'     => "Robbins",
+  'profile_pic'   => "https://platform-lookaside.fbsbx.com/platform/profilepic/?psid=1464633220279330&width=1024&ext=1537650777&hash=AeQzWeTgFqlAyiye"
+}
+```
+
+If your bot has permission to retrieve additional fields, you can specify them as an array of symbols via the `fields` argument:
+
+```ruby
+fb_profile = Stealth::Services::Facebook::Client.fetch_profile(
+  recipient_id: current_user_id,
+  fields: [:id, :name, :first_name, :last_name, :profile_pic, :gender, :locale]
+)
+```
+
 ## Replies
 
 Here are the supported replies for the Facebook integration:

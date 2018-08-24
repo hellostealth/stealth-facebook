@@ -30,7 +30,7 @@ module Stealth
 
         def self.fetch_profile(recipient_id:, fields: nil)
           if fields.blank?
-            fields = [:first_name, :last_name, :profile_pic, :locale, :timezone, :gender, :is_payment_enabled, :last_ad_referral]
+            fields = [:id, :name, :first_name, :last_name, :profile_pic]
           end
 
           query_hash = {
@@ -40,7 +40,7 @@ module Stealth
 
           uri = URI::HTTPS.build(
             host: "graph.facebook.com",
-            path: "/v2.12/#{recipient_id}",
+            path: "/#{recipient_id}",
             query: query_hash.to_query
           )
 
