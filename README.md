@@ -329,7 +329,7 @@ To generate a list via Stealth Facebook:
   top_element_style: large
   buttons:
     - type: payload
-      title: View More
+      text: View More
       payload: view_more
   elements:
     - title: Your Daily News Update
