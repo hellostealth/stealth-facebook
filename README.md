@@ -334,7 +334,7 @@ To generate a list via Stealth Facebook:
   elements:
     - title: Your Daily News Update
       subtitle: The following stories have been curated just for you.
-      image_url: "https://news-articles.com/logo.png"
+      image_url: "https://loremflickr.com/320/240"
       buttons:
         - type: url
           url: "https://news-articles.com/199"
@@ -342,7 +342,7 @@ To generate a list via Stealth Facebook:
           webview_height: 'tall'
     - title: Breakthrough in AI
       subtitle: Major breakthrough in the AI space.
-      image_url: "https://news-articles.com/ai.png"
+      image_url: "https://loremflickr.com/320/320"
       default_action:
         - url: "https://news-articles.com/232"
           webview_height: 'tall'
