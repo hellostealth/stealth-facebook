@@ -281,7 +281,7 @@ module Stealth
             end
 
             if element["default_action"].present?
-              default_action = generate_default_action(action_params: element["default_action"])
+              default_action = generate_default_action(action_params: element["default_action"].first)
               template["default_action"] = default_action
             end
 
