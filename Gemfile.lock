@@ -58,7 +58,7 @@ GEM
     rack (2.0.5)
     rack-protection (2.0.4)
       rack
-    rack-test (0.7.0)
+    rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
@@ -116,7 +116,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  rack-test (~> 0.7)
+  rack-test (~> 1.1)
   rspec (~> 3.6)
   rspec_junit_formatter (~> 0.3)
   stealth-facebook!
