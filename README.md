@@ -2,6 +2,8 @@
 
 This integration adds support for Facebook bots within [Stealth](https://github.com/hellostealth/stealth).
 
+[![Gem Version](https://badge.fury.io/rb/stealth-facebook.svg)](https://badge.fury.io/rb/stealth-facebook)
+
 ## Configure Your Facebook Page
 
 To create your Facebook bot, visit the [Facebook Developers](https://developers.facebook.com) page. Full instructions are provided on the [Facebook Messenger Docs](https://developers.facebook.com/docs/messenger-platform/) page.
