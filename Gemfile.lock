@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    stealth-facebook (0.10.2)
+    stealth-facebook (0.11.2)
       faraday (~> 0.13)
       stealth (< 2.0)
 
@@ -41,7 +41,7 @@ GEM
     erubi (1.7.1)
     faraday (0.15.3)
       multipart-post (>= 1.2, < 3)
-    i18n (1.1.0)
+    i18n (1.1.1)
       concurrent-ruby (~> 1.0)
     loofah (2.2.2)
       crass (~> 1.0.2)
@@ -122,4 +122,4 @@ DEPENDENCIES
   stealth-facebook!
 
 BUNDLED WITH
-   1.16.1
+   1.16.3
