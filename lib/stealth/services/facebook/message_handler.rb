@@ -59,7 +59,7 @@ module Stealth
           end
 
           def get_timestamp
-            Time.at(facebook_message['timestamp']).to_datetime
+            Time.at(facebook_message['timestamp']/1000).to_datetime
           end
 
           def process_facebook_event
