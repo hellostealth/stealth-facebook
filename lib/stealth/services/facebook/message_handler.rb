@@ -3,6 +3,7 @@
 
 require 'stealth/services/facebook/events/message_event'
 require 'stealth/services/facebook/events/postback_event'
+require 'stealth/services/facebook/events/message_reads_event'
 
 module Stealth
   module Services
@@ -70,6 +71,11 @@ module Stealth
               )
             elsif facebook_message['postback'].present?
               message_event = Stealth::Services::Facebook::PostbackEvent.new(
+                service_message: service_message,
+                params: facebook_message
+              )
+            elsif facebook_message['read'].present?
+              message_event = Stealth::Services::Facebook::MessageReadsEvent.new(
                 service_message: service_message,
                 params: facebook_message
               )
