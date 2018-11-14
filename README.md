@@ -128,6 +128,36 @@ fb_profile = Stealth::Services::Facebook::Client.fetch_profile(
 )
 ```
 
+### Analytics
+
+If you'd like to track custom bot metrics in addition to the ones provided automatically by Facebook Analytics, you can do so in starting in version `0.12.0` of this gem.
+
+In order to send these metrics, you'll need to add the `app_id` of the bot as well as the `page_id` of the Facebook page (attached to the bot) to `services.yml`:
+
+```yaml
+default: &default
+  facebook:
+    verify_token: <%= ENV['FACEBOOK_VERIFY_TOKEN'] %>
+    page_access_token: <%= ENV['FACEBOOK_ACCESS_TOKEN'] %>
+    app_id: <%= ENV['FACEBOOK_APP_ID'] %>
+    page_id: <%= ENV['FACEBOOK_PAGE_ID'] %>
+    ...
+```
+
+Then to collect a metric:
+
+```ruby
+Stealth::Services::Facebook::Client.track(recipient_id: u.recipient_id, metric: 'name of your metric', value: 2)
+```
+
+To specify additional options:
+
+```ruby
+Stealth::Services::Facebook::Client.track(recipient_id: u.recipient_id, metric: 'signup', value: 2, options: { 'fb_description' => 'A signup occured.' })
+```
+
+More info about events, such as which options are available, can be found on [Facebook's Events API docs](https://developers.facebook.com/docs/marketing-api/app-event-api) page.
+
 ## Replies
 
 Here are the supported replies for the Facebook integration:
