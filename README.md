@@ -130,9 +130,9 @@ fb_profile = Stealth::Services::Facebook::Client.fetch_profile(
 
 ### Analytics
 
-If you'd like to track custom bot metrics in addition to the ones provided automatically by Facebook Analytics, you can do so in starting in version `0.12.0` of this gem.
+If you'd like to track custom bot metrics in addition to the ones provided automatically by Facebook Analytics, you can do so starting with version `0.12.0` of this gem.
 
-In order to send these metrics, you'll need to add the `app_id` of the bot as well as the `page_id` of the Facebook page (attached to the bot) to `services.yml`:
+In order to send these metrics, you'll need to include the `app_id` of the bot as well as the `page_id` of the Facebook page (attached to the bot) to `services.yml`:
 
 ```yaml
 default: &default
@@ -150,7 +150,7 @@ Then to collect a metric:
 Stealth::Services::Facebook::Client.track(recipient_id: u.recipient_id, metric: 'name of your metric', value: 2)
 ```
 
-To specify additional options:
+You can specify additional options:
 
 ```ruby
 Stealth::Services::Facebook::Client.track(recipient_id: u.recipient_id, metric: 'signup', value: 2, options: { 'fb_description' => 'A signup occured.' })
