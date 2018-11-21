@@ -12,7 +12,18 @@ When configuring your webhooks, you'll want to enable the `messages`, `messaging
 
 <img src='fb-config.png' width='875px' alt='Facebook Config Screenshot' />
 
-Make sure you don't enable `message_reads` as that is not yet supported by this gem.
+### message_reads
+
+Beginning with version `0.13.0` of this gem, `message_reads` webhooks are supported. When enabled in your Facebook configuration, they will appear as `current_message.read`. That will return a hash:
+
+```ruby
+{
+  watermark: 1458668856253,
+  seq: 38
+}
+```
+
+More info about `message_reads` webhooks can be found in the [Facebook Developer docs](https://developers.facebook.com/docs/messenger-platform/reference/webhook-events/message-reads).
 
 ## Configure The Integration
 
