@@ -10,8 +10,8 @@ require 'stealth/services/facebook/setup'
 module Stealth
   module Services
     module Facebook
-
       class Client < Stealth::Services::BaseClient
+
         FB_ENDPOINT = if ENV['FACEBOOK_API_VERSION'].present?
           "https://graph.facebook.com/v#{ENV['FACEBOOK_API_VERSION']}/me"
         else
@@ -115,45 +115,45 @@ module Stealth
             )
           end
         end
-      end
 
-      def self.track_progress(recipient_id:, title:, completed_steps:, total_steps:, completed: false)
-        thread_banner = {
-          title: title,
-          progress: {
-            completed_steps: completed_steps,
-            total_steps: total_steps,
-            completed: completed
+        def self.track_progress(recipient_id:, title:, completed_steps:, total_steps:, completed: false)
+          thread_banner = {
+            title: title,
+            progress: {
+              completed_steps: completed_steps,
+              total_steps: total_steps,
+              completed: completed
+            }
           }
-        }
 
-        params = {
-          psid: recipient_id,
-          thread_banner: thread_banner
-        }
+          params = {
+            psid: recipient_id,
+            thread_banner: thread_banner
+          }
 
-        access_token = "access_token=#{Stealth.config.facebook.page_access_token}"
-        progress_endpoint = [
-          [FB_ENDPOINT, 'messenger_thread_settings'].join('/'),
-          access_token
-        ].join('?')
+          access_token = "access_token=#{Stealth.config.facebook.page_access_token}"
+          progress_endpoint = [
+            [FB_ENDPOINT, 'messenger_thread_settings'].join('/'),
+            access_token
+          ].join('?')
 
-        res = http_client.post(progress_endpoint, body: MultiJson.dump(params))
-        Stealth::Logger.l(
-          topic: "facebook",
-          message: "Sent thread progress to user #{recipient_id}. Response: #{res.status}: #{res.body}"
-        )
-
-        if res.status.success?
-          MultiJson.load(res.body.to_s)
-        else
-          raise(
-            Stealth::Errors::ServiceError,
-            "Facebook error #{res.status}: #{res.body}"
+          res = http_client.post(progress_endpoint, body: MultiJson.dump(params))
+          Stealth::Logger.l(
+            topic: "facebook",
+            message: "Sent thread progress to user #{recipient_id}. Response: #{res.status}: #{res.body}"
           )
-        end
-      end
 
+          if res.status.success?
+            MultiJson.load(res.body.to_s)
+          else
+            raise(
+              Stealth::Errors::ServiceError,
+              "Facebook error #{res.status}: #{res.body}"
+            )
+          end
+        end
+
+      end
     end
   end
 end
