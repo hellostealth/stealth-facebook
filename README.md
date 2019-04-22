@@ -79,6 +79,8 @@ test:
 
 As with all Stealth integrations, integrations can be specified by environment. You'll want to replace `FACEBOOK_VERIFY_TOKEN` and `FACEBOOK_ACCESS_TOKEN` with your respective keys from your Facebook page.
 
+You may also specify a Facebook Graph API version by setting the ENV var `FACEBOOK_API_VERSION` to API version your bot has been cofnigured to use. If none is specified, this driver will currently default to version `3.2`.
+
 These are the supported setup options:
 
 ### greeting
