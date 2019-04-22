@@ -1,7 +1,7 @@
 # coding: utf-8
 # frozen_string_literal: true
 
-require 'faraday'
+require 'http'
 
 require 'stealth/services/facebook/message_handler'
 require 'stealth/services/facebook/reply_handler'
@@ -12,7 +12,11 @@ module Stealth
     module Facebook
 
       class Client < Stealth::Services::BaseClient
-        FB_ENDPOINT = "https://graph.facebook.com/v2.10/me"
+        FB_ENDPOINT = if ENV['FACEBOOK_API_VERSION'].present?
+          "https://graph.facebook.com/v#{ENV['FACEBOOK_API_VERSION']}/me"
+        else
+          "https://graph.facebook.com/v3.2/me"
+        end
 
         attr_reader :api_endpoint, :reply
 
@@ -23,9 +27,22 @@ module Stealth
         end
 
         def transmit
-          headers = { "Content-Type" => "application/json" }
-          response = Faraday.post(api_endpoint, reply.to_json, headers)
-          Stealth::Logger.l(topic: "facebook", message: "Transmitting. Response: #{response.status}: #{response.body}")
+          res = self
+                  .class
+                  .http_client
+                  .post(api_endpoint, body: MultiJson.dump(reply))
+
+          Stealth::Logger.l(
+            topic: "facebook",
+            message: "Transmitted. Response: #{res.status.code}: #{res.body}"
+          )
+        end
+
+        def self.http_client
+          headers = {
+            'Content-Type' => 'application/json'
+          }
+          HTTP.timeout(connect: 15, read: 30).headers(headers)
         end
 
         def self.fetch_profile(recipient_id:, fields: nil)
@@ -44,13 +61,19 @@ module Stealth
             query: query_hash.to_query
           )
 
-          response = Faraday.get(uri.to_s)
-          Stealth::Logger.l(topic: "facebook", message: "Requested user profile for #{recipient_id}. Response: #{response.status}: #{response.body}")
+          res = http_client.get(uri.to_s)
+          Stealth::Logger.l(topic:
+            'facebook',
+            message: "Requested user profile for #{recipient_id}. Response: #{res.status.code}: #{res.body}"
+          )
 
-          if response.status.in?(200..299)
-            MultiJson.load(response.body)
+          if res.status.success?
+            MultiJson.load(res.body.to_s)
           else
-            raise(Stealth::Errors::ServiceError, "Facebook error #{response.status}: #{response.body}")
+            raise(
+              Stealth::Errors::ServiceError,
+              "Facebook error #{res.status}: #{res.body}"
+            )
           end
         end
 
@@ -77,13 +100,19 @@ module Stealth
             path: "/#{Stealth.config.facebook.app_id}/activities"
           )
 
-          response = Faraday.post(uri.to_s, params)
-          Stealth::Logger.l(topic: "facebook", message: "Sending custom event for metric: #{metric} and value: #{value}. Response: #{response.status}: #{response.body}")
+          res = http_client.post(uri.to_s, body: MultiJson.dump(params))
+          Stealth::Logger.l(
+            topic: "facebook",
+            message: "Sent custom event for metric: #{metric} and value: #{value}. Response: #{res.status}: #{res.body}"
+          )
 
-          if response.status.in?(200..299)
-            MultiJson.load(response.body)
+          if res.status.success?
+            MultiJson.load(res.body.to_s)
           else
-            raise(Stealth::Errors::ServiceError, "Facebook error #{response.status}: #{response.body}")
+            raise(
+              Stealth::Errors::ServiceError,
+              "Facebook error #{res.status}: #{res.body}"
+            )
           end
         end
       end
