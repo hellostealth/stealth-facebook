@@ -160,6 +160,19 @@ module Stealth
           template
         end
 
+        def form_progress
+          template = unstructured_template
+
+          form_progress_template = form_progress_template(
+            form_url: reply["form_url"],
+            form_title: reply["form_title"]
+          )
+
+          template['message']['attachment'] = form_progress_template
+
+          template
+        end
+
         def mark_seen
           sender_action_template(action: 'mark_seen')
         end
@@ -327,6 +340,17 @@ module Stealth
                 "id" => recipient_id
               },
               "sender_action" => action
+            }
+          end
+
+          def form_progress_template(form_url:, form_title:)
+            {
+              "type" => "template",
+              "payload" => {
+                "template_type" => "form_progress",
+                "title"         => form_title,
+                "form_url"      => form_url
+              }
             }
           end
 
