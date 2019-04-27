@@ -4,6 +4,7 @@
 require 'stealth/services/facebook/events/message_event'
 require 'stealth/services/facebook/events/postback_event'
 require 'stealth/services/facebook/events/message_reads_event'
+require 'stealth/services/facebook/events/messaging_referral_event'
 
 module Stealth
   module Services
@@ -39,6 +40,7 @@ module Stealth
           @service_message = ServiceMessage.new(service: 'facebook')
           @facebook_message = params['entry'].first['messaging'].first
           service_message.sender_id = get_sender_id
+          service_message.target_id = get_target_id
           service_message.timestamp = get_timestamp
           process_facebook_event
 
@@ -63,6 +65,10 @@ module Stealth
             facebook_message['sender']['id']
           end
 
+          def get_target_id
+            facebook_message['recipient']['id']
+          end
+
           def get_timestamp
             Time.at(facebook_message['timestamp']/1000).to_datetime
           end
@@ -80,6 +86,11 @@ module Stealth
               )
             elsif facebook_message['read'].present?
               message_event = Stealth::Services::Facebook::MessageReadsEvent.new(
+                service_message: service_message,
+                params: facebook_message
+              )
+            elsif facebook_message['referral'].present?
+              message_event = Stealth::Services::Facebook::MessagingReferralEvent.new(
                 service_message: service_message,
                 params: facebook_message
               )
