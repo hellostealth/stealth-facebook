@@ -39,6 +39,7 @@ module Stealth
           @service_message = ServiceMessage.new(service: 'facebook')
           @facebook_message = params['entry'].first['messaging'].first
           service_message.sender_id = get_sender_id
+          service_message.target_id = get_target_id
           service_message.timestamp = get_timestamp
           process_facebook_event
 
@@ -61,6 +62,10 @@ module Stealth
 
           def get_sender_id
             facebook_message['sender']['id']
+          end
+
+          def get_target_id
+            facebook_message['recipient']['id']
           end
 
           def get_timestamp
