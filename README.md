@@ -25,6 +25,14 @@ Beginning with version `0.13.0` of this gem, `message_reads` webhooks are suppor
 
 More info about `message_reads` webhooks can be found in the [Facebook Developer docs](https://developers.facebook.com/docs/messenger-platform/reference/webhook-events/message-reads).
 
+### messaging_referrals
+
+Facebook separates referral data for users with an existing thread versus those that have initiated a new thread. For the former case, the `messaging_referrals` webhook event is used to send the referral data. For the latter case, the referral payload is sent via the `postback` event.
+
+For both scenarios above, this driver will include the referral payload as part of the `current_message`. It can be accessed via `current_message.referral`.
+
+More info about `messaging_referrals` webhooks and the different referral payloads can be found in the [Facebook Developer docs](https://developers.facebook.com/docs/messenger-platform/reference/webhook-events/messaging_referrals/)
+
 ## Configure The Integration
 
 ```yaml
