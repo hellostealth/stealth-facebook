@@ -194,7 +194,7 @@ Text replies can also include suggestions, which will be rendered as quick repli
     - text: Red
 ```
 
-Although not as common, text replies can also include buttons:
+Text replies can also include buttons:
 
 ```yaml
 - reply_type: text
@@ -210,7 +210,9 @@ Although not as common, text replies can also include buttons:
 
 ### suggestions
 
-Though suggestions are not a reply type on their own, they are frequently used to optimize the accuracy and speed of your bot. In the `text` reply type above, we used simple labels for our suggestions. Facebook supports a few special types of quick replies, however.
+Though suggestions are not a reply type on their own, they are frequently used to optimize the accuracy and speed of your bot. In the `text` reply type above, we used simple labels for our suggestions. Facebook supports a few special types of quick replies, discussed below.
+
+Please note that starting with version `0.17.0` of this gem, quick replies return their response via `current_message.message` as well as `current_message.payload`. Please make sure your `route` method in `BotController` handles that accordingly.
 
 #### Location
 
