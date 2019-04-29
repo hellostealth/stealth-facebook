@@ -22,11 +22,11 @@ module Stealth
         private
 
           def fetch_payload
-            service_message.payload = params['postback']['payload']
+            service_message.payload = params.dig('postback', 'payload')
           end
 
           def fetch_referral
-            service_message.referral = params['postback']['referral']
+            service_message.referral = params.dig('postback', 'referral')
           end
 
       end

@@ -23,20 +23,21 @@ module Stealth
         private
 
           def fetch_message
-            if params['message']['quick_reply'].present?
-              service_message.message = params['message']['quick_reply']['payload']
-            elsif params['message']['text'].present?
-              service_message.message = params['message']['text']
+            if params.dig('message', 'quick_reply').present?
+              service_message.message = params.dig('message', 'quick_reply', 'payload')
+              service_message.payload = service_message.message
+            elsif params.dig('message', 'text').present?
+              service_message.message = params.dig('message', 'text')
             end
           end
 
           def fetch_location
-            if params['message']['attachments'].present? && params['message']['attachments'].is_a?(Array)
-              params['message']['attachments'].each do |attachment|
+            if params.dig('message', 'attachments').present? && params.dig('message', 'attachments').is_a?(Array)
+              params.dig('message', 'attachments').each do |attachment|
                 next unless attachment['type'] == 'location'
 
-                lat = attachment['payload']['coordinates']['lat']
-                lng = attachment['payload']['coordinates']['long']
+                lat = attachment.dig('payload', 'coordinates', 'lat')
+                lng = attachment.dig('payload', 'coordinates', 'long')
 
                 service_message.location = {
                   lat: lat,
@@ -47,8 +48,8 @@ module Stealth
           end
 
           def fetch_attachments
-            if params['message']['attachments'].present? && params['message']['attachments'].is_a?(Array)
-              params['message']['attachments'].each do |attachment|
+            if params.dig('message', 'attachments').present? && params.dig('message', 'attachments').is_a?(Array)
+              params.dig('message', 'attachments').each do |attachment|
                 service_message.attachments << {
                   type: attachment['type'],
                   url: attachment['payload']['url']
