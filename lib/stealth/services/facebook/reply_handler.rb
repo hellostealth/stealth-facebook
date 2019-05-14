@@ -387,6 +387,12 @@ module Stealth
                 quick_reply = { "content_type" => "user_phone_number" }
               when 'email'
                 quick_reply = { "content_type" => "user_email" }
+              when 'birthday'
+                quick_reply = { "content_type" => "user_birthday" }
+              when 'state'
+                quick_reply = { "content_type" => "user_state" }
+              when 'zip_code'
+                quick_reply = { "content_type" => "user_zip_code" }
               else
                 quick_reply = {
                   "content_type" => "text",
