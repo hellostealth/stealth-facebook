@@ -24,8 +24,8 @@ module Stealth
 
           def fetch_message
             if params.dig('message', 'quick_reply').present?
-              service_message.message = params.dig('message', 'quick_reply', 'payload')
-              service_message.payload = service_message.message
+              service_message.message = params.dig('message', 'text')
+              service_message.payload = params.dig('message', 'quick_reply', 'payload')
             elsif params.dig('message', 'text').present?
               service_message.message = params.dig('message', 'text')
             end
