@@ -391,34 +391,38 @@ module Stealth
             fb_buttons = buttons.collect do |button|
               case button['type']
               when 'url'
-                button = {
+                _button = {
                   "type" => "web_url",
                   "url" => button["url"],
                   "title" => button["text"]
                 }
 
                 if button["webview_height"].present?
-                  button["webview_height_ratio"] = button["webview_height"]
+                  _button["webview_height_ratio"] = button["webview_height"]
                 end
 
-                button
+                if button['messenger_extensions'].present?
+                  _button['messenger_extensions'] = true
+                end
+
+                _button
 
               when 'payload'
-                button = {
+                _button = {
                   "type" => "postback",
                   "payload" => button["payload"],
                   "title" => button["text"]
                 }
 
               when 'call'
-                button = {
+                _button = {
                   "type" => "phone_number",
                   "payload" => button["phone_number"],
                   "title" => button["text"]
                 }
 
               when 'nested'
-                button = {
+                _button = {
                   "type" => "nested",
                   "title" => button["text"],
                   "call_to_actions" => generate_buttons(buttons: button["buttons"])
@@ -428,7 +432,7 @@ module Stealth
                 raise(Stealth::Errors::ServiceImpaired, "Sorry, we don't yet support #{button["type"]} buttons yet!")
               end
 
-              button
+              _button
             end
 
             fb_buttons
