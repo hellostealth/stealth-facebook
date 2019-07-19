@@ -179,14 +179,14 @@ These are standard text replies. It can sent like:
 
 ```yaml
 - reply_type: text
-  text: Hello World!
+  text: "Hello World!"
 ```
 
 Text replies can also include suggestions, which will be rendered as quick replies:
 
 ```yaml
 - reply_type: text
-  text: What is your favorite color?
+  text: "What is your favorite color?"
   suggestions:
     - text: Blue
     - text: Red
@@ -196,7 +196,7 @@ Although not as common, text replies can also include buttons:
 
 ```yaml
 - reply_type: text
-  text: Would you like to give us a call?
+  text: "Would you like to give us a call?"
   buttons:
     - type: call
       phone_number: "+15552991212"
@@ -280,7 +280,7 @@ This is the most common button type. When a user presses a button that is `paylo
 
 ```yaml
 - reply_type: text
-  text: Please press the button below
+  text: "Please press the button below"
   buttons:
     - type: payload
       text: 'Press me!'
@@ -296,17 +296,21 @@ The `url` button is useful when sharing a link to a website. By default, it will
 
 ```yaml
 - reply_type: text
-  text: Find out more via our website
+  text: "Find out more via our website"
   buttons:
     - type: url
       text: 'Visit website'
       url: 'https://example.org'
+      messenger_extensions: true
 
 ```
+
+Enabling messenger_extensions allows your webview to access a selection of features from the Messenger platform. More info [here](https://developers.facebook.com/docs/messenger-platform/webview/extensions?source=post_page). Without this parameter set to true, the webview opens in a separate tab or window if a user is visiting from the 'messenger.com' domain.
 
 You can also specify the height of the webview window that opens up in Messenger via: `webview_height`. You can choose between `compact`, `tall`, and `full`.
 
 More info [here](https://developers.facebook.com/docs/messenger-platform/webview).
+
 
 #### call
 
@@ -314,7 +318,7 @@ The `call` button type will prompt the user to dial the specified number. The nu
 
 ```yaml
 - reply_type: text
-  text: Give us a ring!
+  text: "Give us a ring!"
   buttons:
     - type: call
       text: 'Call'
