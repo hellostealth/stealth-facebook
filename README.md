@@ -448,3 +448,29 @@ To send an audio clip:
 The `audio_url` should be set to URL where the video has been uploaded.
 
 Audio replies support buttons and suggestions like text replies.
+
+### Account Linking
+
+Account Linking allows you to invite users to log-in using your own authentication flow, and to receive a Messenger page-scoped ID (PSID) upon completion. You can find more info about Facebook Account Linking [here](https://developers.facebook.com/docs/messenger-platform/identity/account-linking).
+
+#### Login
+
+The `login` button type will prompt the user to log-in using your own authentication flow in the case he or she has an account with your business. You can find more info about Facebook Log In Button [here](https://developers.facebook.com/docs/messenger-platform/reference/buttons/login).
+
+To create a `login` button:
+
+```yaml
+- reply_type: login
+  url: "https://my-app.com/login"
+```
+
+#### Logout
+
+The `logout` button type is used in the account linking flow to unlink the message recipient's identity on Messenger with their account on your site. You can find more info about Facebook Log Out Button [here](https://developers.facebook.com/docs/messenger-platform/reference/buttons/logout).
+
+To create a `logout` button:
+
+```yaml
+- reply_type: logout
+```
+
