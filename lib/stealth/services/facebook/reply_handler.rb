@@ -428,6 +428,12 @@ module Stealth
                   "call_to_actions" => generate_buttons(buttons: button["buttons"])
                 }
 
+              when 'login'
+                _button = {
+                  "type" => "account_link",
+                  "url" => button["url"]
+                }
+
               else
                 raise(Stealth::Errors::ServiceImpaired, "Sorry, we don't yet support #{button["type"]} buttons yet!")
               end
