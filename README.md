@@ -280,7 +280,7 @@ This is the most common button type. When a user presses a button that is `paylo
 
 ```yaml
 - reply_type: text
-  text: Please press the button below
+  text: Please press the button below.
   buttons:
     - type: payload
       text: 'Press me!'
@@ -460,8 +460,11 @@ The `login` button type will prompt the user to log-in using your own authentica
 To create a `login` button:
 
 ```yaml
-- reply_type: login
-  url: "https://my-app.com/login"
+- reply_type: text
+  text: "Log in to access your account information."
+  buttons:
+  - type: login
+    url: "https://my-app.com/login"
 ```
 
 #### Logout
@@ -471,6 +474,9 @@ The `logout` button type is used in the account linking flow to unlink the messa
 To create a `logout` button:
 
 ```yaml
-- reply_type: logout
+- reply_type: text
+  text: "Log out"
+  buttons:
+  - type: logout
 ```
 
