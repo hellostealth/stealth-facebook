@@ -424,14 +424,12 @@ module Stealth
               when 'login'
                 _button = {
                   "type" => "account_link",
-                  "title" => button["text"],
                   "url" => button["url"]
                 }
 
               when 'logout'
                 _button = {
-                  "type" => "account_unlink",
-                  "title" => button["text"]
+                  "type" => "account_unlink"
                 }
 
               when 'nested'
