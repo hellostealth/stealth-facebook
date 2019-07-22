@@ -463,8 +463,8 @@ To create a `login` button:
 - reply_type: text
   text: "Log in to access your account information."
   buttons:
-  - type: login
-    url: "https://my-app.com/login"
+    - type: login
+      url: "https://my-app.com/login"
 ```
 
 #### Logout
@@ -477,6 +477,6 @@ To create a `logout` button:
 - reply_type: text
   text: "Log out"
   buttons:
-  - type: logout
+    - type: logout
 ```
 
