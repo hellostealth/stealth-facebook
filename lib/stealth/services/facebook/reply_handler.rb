@@ -406,7 +406,7 @@ module Stealth
                 end
 
                 if button['webview_share_button'].present?
-                  _button['webview_share_button'] = hide
+                  _button['webview_share_button'] = 'hide'
                 end
 
                 _button
