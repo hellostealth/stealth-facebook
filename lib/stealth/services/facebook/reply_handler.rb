@@ -405,6 +405,9 @@ module Stealth
                   _button['messenger_extensions'] = true
                 end
 
+                if button['webview_share_button'].present?
+                  _button['webview_share_button'] = hide
+
                 _button
 
               when 'payload'
