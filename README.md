@@ -304,10 +304,11 @@ The `url` button is useful when sharing a link to a website. By default, it will
       messenger_extensions: true
 
 ```
-
 Enabling messenger_extensions allows your webview to access a selection of features from the Messenger platform. More info [here](https://developers.facebook.com/docs/messenger-platform/webview/extensions?source=post_page). Without this parameter set to true, the webview opens in a separate tab or window if a user is visiting from the 'messenger.com' domain.
 
 You can also specify the height of the webview window that opens up in Messenger via: `webview_height`. You can choose between `compact`, `tall`, and `full`.
+
+You can also disable the default share button in the Webview (for sensitive info) by setting the `webview_share_button` property to `hide`.
 
 More info [here](https://developers.facebook.com/docs/messenger-platform/webview).
 
