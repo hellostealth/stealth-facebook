@@ -395,6 +395,7 @@ module Stealth
                   "type" => "web_url",
                   "url" => button["url"],
                   "title" => button["text"]
+
                 }
 
                 if button["webview_height"].present?
@@ -407,6 +408,10 @@ module Stealth
 
                 if button['webview_share_button'].present?
                   _button['webview_share_button'] = 'hide'
+                end
+
+                if button['fallback_url'].present?
+                  _button['fallback_url'] = button['fallback_url']
                 end
 
                 _button
