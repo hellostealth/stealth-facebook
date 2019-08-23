@@ -42,7 +42,7 @@ module Stealth
           headers = {
             'Content-Type' => 'application/json'
           }
-          HTTP.timeout(connect: 15, read: 30).headers(headers)
+          HTTP.timeout(connect: 15, read: 60).headers(headers)
         end
 
         def self.fetch_profile(recipient_id:, fields: nil)
