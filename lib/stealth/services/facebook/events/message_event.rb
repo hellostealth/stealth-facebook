@@ -50,9 +50,19 @@ module Stealth
           def fetch_attachments
             if params.dig('message', 'attachments').present? && params.dig('message', 'attachments').is_a?(Array)
               params.dig('message', 'attachments').each do |attachment|
+                # Seems to be a bug in Messenger, but in attachments of type `fallback`
+                # we are seeing the URL come in at the attachment-level rather than
+                # nested within the payload as the API specifies:
+                # https://developers.facebook.com/docs/messenger-platform/reference/webhook-events/messages
+                payload_url = if attachment.dig('payload', 'url').present?
+                  attachment['payload']['url']
+                else
+                  attachment['url']
+                end
+
                 service_message.attachments << {
                   type: attachment['type'],
-                  url: attachment['payload']['url']
+                  url: payload_url
                 }
               end
             end
