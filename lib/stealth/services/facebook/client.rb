@@ -32,6 +32,18 @@ module Stealth
                   .http_client
                   .post(api_endpoint, body: MultiJson.dump(reply))
 
+          if res.status.client_error? # HTTP 4xx error
+            # Messenger error sub-codes (https://developers.facebook.com/docs/messenger-platform/reference/send-api/error-codes)
+            case res.body
+            when /1545041/
+              raise Stealth::Errors::UserOptOut
+            when /2018108/
+              raise Stealth::Errors::UserOptOut
+            when /2018028/
+              raise Stealth::Errors::InvalidSessionID.new('Cannot message users who are not admins, developers or testers of the app until pages_messaging permission is reviewed and the app is live.')
+            end
+          end
+
           Stealth::Logger.l(
             topic: "facebook",
             message: "Transmitted. Response: #{res.status.code}: #{res.body}"
