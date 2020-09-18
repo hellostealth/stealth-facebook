@@ -12,8 +12,8 @@ Gem::Specification.new do |s|
   s.author = 'Mauricio Gomes'
   s.email = 'mauricio@edge14.com'
 
-  s.add_dependency 'stealth', '< 2.0'
-  s.add_dependency 'faraday', '~> 0.13'
+  s.add_dependency 'stealth', '~> 2.0'
+  s.add_dependency 'faraday', '~> 1.0'
 
   s.add_development_dependency 'rspec', '~> 3.6'
   s.add_development_dependency 'rspec_junit_formatter', '~> 0.3'
