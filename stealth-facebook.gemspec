@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'stealth', '>= 2.0.0.beta'
   s.add_dependency 'http', '~> 4.4'
 
-  s.add_development_dependency 'rspec', '~> 3.6'
+  s.add_development_dependency 'rspec', '~> 3'
   s.add_development_dependency 'rspec_junit_formatter', '~> 0.3'
   s.add_development_dependency 'rack-test', '~> 1.1'
 
