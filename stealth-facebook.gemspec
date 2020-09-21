@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.author = 'Mauricio Gomes'
   s.email = 'mauricio@edge14.com'
 
-  s.add_dependency 'stealth', '~> 2.0'
+  s.add_dependency 'stealth', '>= 2.0.0.beta'
   s.add_dependency 'http', '~> 4.4'
 
   s.add_development_dependency 'rspec', '~> 3.6'
