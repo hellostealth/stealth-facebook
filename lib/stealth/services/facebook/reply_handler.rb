@@ -222,7 +222,7 @@ module Stealth
             end
 
             if aspect_ratio.present?
-              template["message"]["payload"]["image_aspect_ratio"] = aspect_ratio
+              template["message"]["attachment"]["payload"]["image_aspect_ratio"] = aspect_ratio
             end
 
             template
