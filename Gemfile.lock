@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    stealth-facebook (0.22.0)
+    stealth-facebook (0.23.0)
       http (~> 5.1)
       stealth (>= 2.0.0.beta)
 
