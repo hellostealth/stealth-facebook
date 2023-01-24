@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     stealth-facebook (0.22.0)
-      http (~> 4.4)
+      http (~> 5.1)
       stealth (>= 2.0.0.beta)
 
 GEM
@@ -14,8 +14,8 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
-    addressable (2.7.0)
-      public_suffix (>= 2.0.2, < 5.0)
+    addressable (2.8.1)
+      public_suffix (>= 2.0.2, < 6.0)
     concurrent-ruby (1.1.7)
     connection_pool (2.2.3)
     domain_name (0.5.20190701)
@@ -24,24 +24,25 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
-    http (4.4.1)
-      addressable (~> 2.3)
+    http (5.1.1)
+      addressable (~> 2.8)
       http-cookie (~> 1.0)
       http-form_data (~> 2.2)
-      http-parser (~> 1.2.0)
-    http-cookie (1.0.3)
+      llhttp-ffi (~> 0.4.0)
+    http-cookie (1.0.5)
       domain_name (~> 0.5)
     http-form_data (2.3.0)
-    http-parser (1.2.3)
-      ffi-compiler (>= 1.0, < 2.0)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
+    llhttp-ffi (0.4.0)
+      ffi-compiler (~> 1.0)
+      rake (~> 13.0)
     minitest (5.14.2)
     multi_json (1.15.0)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     nio4r (2.5.4)
-    public_suffix (4.0.6)
+    public_suffix (5.0.1)
     puma (4.3.6)
       nio4r (~> 2.0)
     rack (2.2.3)
@@ -75,7 +76,7 @@ GEM
       thread_safe (~> 0.1)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.7.7)
+    unf_ext (0.0.8.2)
     zeitwerk (2.4.0)
 
 PLATFORMS
@@ -87,4 +88,4 @@ DEPENDENCIES
   stealth-facebook!
 
 BUNDLED WITH
-   2.1.4
+   2.2.32
