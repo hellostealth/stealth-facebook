@@ -12,10 +12,13 @@ module Stealth
     module Facebook
       class Client < Stealth::Services::BaseClient
 
+        FB_URL = ENV['FACEBOOK_API_URL'] || "graph.facebook.com"
+        FB_HTTP_PROTOCOL = ENV['FACEBOOK_HTTP_PROTOCOL'] || "https"
+
         FB_ENDPOINT = if ENV['FACEBOOK_API_VERSION'].present?
-          "https://graph.facebook.com/v#{ENV['FACEBOOK_API_VERSION']}/me"
+          "#{FB_HTTP_PROTOCOL}://#{FB_URL}/v#{ENV['FACEBOOK_API_VERSION']}/me"
         else
-          "https://graph.facebook.com/v3.2/me"
+          "#{FB_HTTP_PROTOCOL}://#{FB_URL}/v3.2/me"
         end
 
         attr_reader :api_endpoint, :reply
@@ -67,11 +70,19 @@ module Stealth
             access_token: Stealth.config.facebook.page_access_token
           }
 
-          uri = URI::HTTPS.build(
-            host: "graph.facebook.com",
-            path: "/#{recipient_id}",
-            query: query_hash.to_query
-          )
+          if FB_HTTP_PROTOCOL == 'https'
+            uri = URI::HTTPS.build(
+              host: FB_URL,
+              path: "/#{recipient_id}",
+              query: query_hash.to_query
+            )
+          elsif FB_HTTP_PROTOCOL == 'http'
+            uri = URI::HTTP.build(
+              host: FB_URL,
+              path: "/#{recipient_id}",
+              query: query_hash.to_query
+            )
+          end
 
           res = http_client.get(uri.to_s)
           Stealth::Logger.l(topic:
@@ -107,10 +118,17 @@ module Stealth
             page_id: Stealth.config.facebook.page_id
           }
 
-          uri = URI::HTTPS.build(
-            host: "graph.facebook.com",
-            path: "/#{Stealth.config.facebook.app_id}/activities"
-          )
+          if FB_HTTP_PROTOCOL == 'https'
+            uri = URI::HTTPS.build(
+              host: FB_URL,
+              path: "/#{Stealth.config.facebook.app_id}/activities"
+            )
+          elsif FB_HTTP_PROTOCOL == 'http'
+            uri = URI::HTTP.build(
+              host: FB_URL,
+              path: "/#{Stealth.config.facebook.app_id}/activities"
+            )
+          end
 
           res = http_client.post(uri.to_s, body: MultiJson.dump(params))
           Stealth::Logger.l(

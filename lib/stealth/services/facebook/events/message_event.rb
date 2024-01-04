@@ -18,6 +18,7 @@ module Stealth
           fetch_message
           fetch_location
           fetch_attachments
+          fetch_nlp
         end
 
         private
@@ -65,6 +66,12 @@ module Stealth
                   url: payload_url
                 }
               end
+            end
+          end
+
+          def fetch_nlp
+            if params.dig('message', 'nlp').present?
+              service_message.nlp_result = params.dig('message', 'nlp').as_json
             end
           end
 
